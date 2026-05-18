@@ -2,6 +2,8 @@ from PyDictionary import PyDictionary
 
 dictionary = PyDictionary()
 
+# This is my sample github actions project 
+#To test the workflow
 
 def check_meaning(word):         # if user want to check meaning of word
     return dictionary.meaning(word)
