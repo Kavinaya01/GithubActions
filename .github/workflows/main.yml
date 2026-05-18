@@ -1,0 +1,38 @@
+name: Python Checks and Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  python-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+      # Check for syntax errors
+      - name: Check Syntax Errors
+        run: |
+          python -m py_compile dice.py
+
+      # Run the python file
+      - name: Execute Python Script
+        run: |
+          python dice.py
+
+      # Display completion message
+      - name: Success Message
+        run: |
+          echo "Workflow completed successfully!"
