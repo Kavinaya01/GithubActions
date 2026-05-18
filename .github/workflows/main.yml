@@ -1,9 +1,12 @@
-name: Python Checks and Run
+name: Python Workflow
 
 on:
   push:
     branches:
       - main
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   python-job:
@@ -18,21 +21,21 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install Dependencies
+      - name: Upgrade pip
         run: |
           python -m pip install --upgrade pip
 
-      # Check for syntax errors
-      - name: Check Syntax Errors
+      # Syntax check
+      - name: Check Python Syntax
         run: |
           python -m py_compile dice.py
 
-      # Run the python file
-      - name: Execute Python Script
+      # Run without user input issue
+      - name: Run Script
         run: |
-          python dice.py
+          echo "n" | python dice.py
 
-      # Display completion message
-      - name: Success Message
+      # Show success
+      - name: Done
         run: |
-          echo "Workflow completed successfully!"
+          echo "GitHub Actions completed successfully!"
